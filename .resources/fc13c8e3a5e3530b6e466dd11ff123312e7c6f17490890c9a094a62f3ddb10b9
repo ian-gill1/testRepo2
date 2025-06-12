@@ -1,0 +1,48 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tparams \u003d {\"DownloadButton\": False, \"StopButton\": False, \"CloseButton\": False, \"ParamChange\": False}\n\tsystem.sfc.startChart(\"SLIgnitionTraining\", \"Batch Control\", params)"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button"
+        },
+        "position": {
+          "basis": "31px"
+        },
+        "props": {
+          "align": "start",
+          "image": {
+            "icon": {
+              "color": "#B2B2B2"
+            },
+            "position": "center"
+          },
+          "text": "Start"
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignItems": "center",
+      "direction": "column",
+      "justify": "center"
+    },
+    "type": "ia.container.flex"
+  }
+}

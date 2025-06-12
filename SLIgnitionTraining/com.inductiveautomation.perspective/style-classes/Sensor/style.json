@@ -1,0 +1,13 @@
+{
+  "base": {
+    "style": {
+      "backgroundColor": "#CCCCFF",
+      "color": "#0000FF",
+      "cursor": "pointer",
+      "fontWeight": "bold",
+      "margin": "10px",
+      "padding": "5px",
+      "textAlign": "center"
+    }
+  }
+}

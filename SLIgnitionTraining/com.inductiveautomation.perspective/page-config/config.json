@@ -1,0 +1,72 @@
+{
+  "pages": {
+    "/": {
+      "title": "",
+      "viewPath": "Page/Level 1/Overview"
+    },
+    "/alarms": {
+      "title": "",
+      "viewPath": "Page/Level 1/AlarmsViewer"
+    },
+    "/batchcontrol": {
+      "title": "",
+      "viewPath": "Page/Level 1/BatchControl"
+    }
+  },
+  "sharedDocks": {
+    "bottom": [
+      {
+        "anchor": "fixed",
+        "autoBreakpoint": 480,
+        "content": "cover",
+        "handle": "show",
+        "iconUrl": "",
+        "id": "",
+        "modal": false,
+        "resizable": false,
+        "show": "visible",
+        "size": 100,
+        "viewParams": {},
+        "viewPath": "Footer/Footer"
+      }
+    ],
+    "cornerPriority": "left-right",
+    "left": [
+      {
+        "anchor": "fixed",
+        "autoBreakpoint": 768,
+        "content": "push",
+        "handle": "hide",
+        "iconUrl": "",
+        "id": "menu",
+        "modal": false,
+        "resizable": false,
+        "show": "visible",
+        "size": 210,
+        "viewParams": {},
+        "viewPath": "Docks/Menu Vertical"
+      }
+    ],
+    "top": [
+      {
+        "anchor": "fixed",
+        "autoBreakpoint": 480,
+        "content": "push",
+        "handle": "hide",
+        "iconUrl": "",
+        "id": "",
+        "modal": false,
+        "resizable": false,
+        "show": "visible",
+        "size": 58,
+        "viewParams": {
+          "breakpointLarge": "820",
+          "breakpointMedium": "710",
+          "params": {},
+          "path": "Header/Header"
+        },
+        "viewPath": "Framework/Breakpoint"
+      }
+    ]
+  }
+}

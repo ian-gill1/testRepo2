@@ -1,0 +1,46 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "FlexRepeater"
+        },
+        "position": {
+          "basis": "496px"
+        },
+        "propConfig": {
+          "props.instances": {
+            "binding": {
+              "config": {
+                "queryPath": "GetSensor",
+                "returnFormat": "json"
+              },
+              "type": "query"
+            }
+          }
+        },
+        "props": {
+          "elementStyle": {
+            "padding": 10
+          },
+          "path": "Page/Embedded/SensorInstance",
+          "useDefaultViewHeight": false,
+          "wrap": "wrap"
+        },
+        "type": "ia.display.flex-repeater"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignItems": "center",
+      "direction": "column",
+      "justify": "center"
+    },
+    "type": "ia.container.flex"
+  }
+}

@@ -1,0 +1,81 @@
+<?xml version="1.0" ?>
+<sfc zoom="0.95" canvas="20 20" execution-mode="Callable" hot-editable="false" persist-state="true" redundant-sync="false">
+	<step id="e1ba1c35-fd1c-4aa7-a8dc-c0fa73bcb067" location="5 1" name="__begin" factory-id="begin-step">
+<parameters>
+	<parameter><name>MachineParam</name><expression>-1</expression></parameter>
+</parameters>
+	</step>
+	<step id="edfc3910-5b28-4bad-95a0-de439457e396" location="5 2" name="Start" factory-id="action-step">
+		<start-script>def onStart(chart, step): # WARNING: This resource was generated in a newer version of Ignition. For the best editing experience, recreate it in the current version.
+    dataset = system.db.runNamedQuery("Retrieve WOs")
+    system.tag.writeBlocking(["[SLIgnitionProvider]WorkOrder/OpenWOs"], [dataset])
+</start-script>
+	</step>
+	<step id="07059704-aeed-4eeb-8391-e9efc90b8d78" location="5 4" name="Selection" factory-id="action-step">
+		<start-script>def onStart(chart, step): # WARNING: This resource was generated in a newer version of Ignition. For the best editing experience, recreate it in the current version.
+	value = "Selection"
+	system.tag.writeBlocking(["[SLIgnitionProvider]WorkOrder/Status.value"], [value])
+	</start-script>
+	</step>
+	<step id="465b7d96-8083-474b-8971-988b8dce1fc6" location="5 7" name="Download" factory-id="action-step">
+		<start-script>def onStart(chart, step): # WARNING: This resource was generated in a newer version of Ignition. For the best editing experience, recreate it in the current version.
+	value = chart.MachineParam
+	system.tag.writeBlocking("[SLIgnitionProvider]WorkOrder/MachineParam", value)</start-script>
+	</step>
+	<step id="948ae863-dc85-435c-bd0c-e9b77fa77746" location="5 10" name="Running" factory-id="action-step">
+		<start-script>def onStart(chart, step): # WARNING: This resource was generated in a newer version of Ignition. For the best editing experience, recreate it in the current version.
+	value = "Running"
+	system.tag.writeBlocking("[SLIgnitionProvider]WorkOrder/Status", value)
+	#chart.Paramchange = False</start-script>
+	<timer-script interval="1000">def onTimer(chart, step):
+	prevValue = system.tag.readBlocking("[SLIgnitionProvider]WorkOrder/MachineParam")
+	while True:
+		currValue = system.tag.readBlocking("[SLIgnitionProvider]WorkOrder/MachineParam")
+		if currValue != prevValue:
+			system.sfc.setVariable(chart.instanceId, "prevValue", prevValue)
+			system.sfc.setVariable(chart.instanceId, "currValue", currValue)
+			chart.ParamChange = True
+			break
+</timer-script>
+	</step>
+	<step id="736f7dfe-3439-422a-a81d-78ca1572a86b" location="5 13" name="Stopped" factory-id="action-step">
+		<start-script>def onStart(chart, step): # WARNING: This resource was generated in a newer version of Ignition. For the best editing experience, recreate it in the current version.
+	value = "Stopped"
+	system.tag.writeBlocking("[SLIgnitionProvider]WorkOrder/Status", value)</start-script>
+	</step>
+	<step id="e6dcc764-1a58-4af5-a1c5-2eeb92d06bc0" location="7 13" name="Popup" factory-id="action-step">
+		<start-script>def onStart(chart, step): # WARNING: This resource was generated in a newer version of Ignition. For the best editing experience, recreate it in the current version.
+	
+	#params= {"prevValue": chart.prevValue, "currValue": chart.currValue}
+	system.util.sendMessage(project="SLIgnitionTraining", messageHandler="ErrorPopup", scope="session")
+	</start-script>
+		<stop-script>def onStop(chart, step): # WARNING: This resource was generated in a newer version of Ignition. For the best editing experience, recreate it in the current version.
+	chart.ParamChange = False</stop-script>
+	</step>
+	<step id="0c4ec646-4f88-4edf-ad4b-cf3d42831a01" location="5 15" name="Close" factory-id="action-step">
+		<start-script>def onStart(chart, step): # WARNING: This resource was generated in a newer version of Ignition. For the best editing experience, recreate it in the current version.
+	value = 0
+	system.tag.writeBlocking("[SLIgnitionProvider]WorkOrder/MachineParam", value)</start-script>
+		<stop-script>def onStop(chart, step): # WARNING: This resource was generated in a newer version of Ignition. For the best editing experience, recreate it in the current version.
+	value = "Start"
+	system.tag.writeBlocking("[SLIgnitionProvider]WorkOrder/Status", value)</stop-script>
+	</step>
+	<step id="ca996d20-841f-4b31-9ff7-bbe040d483f4" location="5 17" name="__end1" factory-id="end-step">	</step>
+	<transition id="b1f7b4b6-6d76-471e-9606-167042970d3e" location="5 5">{DownloadButton} = true</transition>
+	<transition id="6cd1bcea-1642-4cd7-9bd0-6744e1fea975" location="5 12">{StopButton} = true</transition>
+	<transition id="f0a9e07c-182c-4e4d-bbdf-19c0479e38aa" location="7 12">{ParamChange} = true</transition>
+	<transition id="c1a61c41-c61c-48c7-8ae6-c6e432ad6730" location="5 14">{CloseButton} = true</transition>
+	<jump id="f57a0189-ef38-4487-9549-9eecc90098d6" location="7 14">A</jump>
+	<anchor id="d65ecc12-d1ee-4b42-8255-8bd6bf50c67c" location="3 8">A</anchor>
+	<link id="3ff90d60-4db3-4e42-a26c-4d3cb13d3551" location="5 3"><up/><down/><right/></link>
+	<link id="30358dbd-d325-4f83-bbd8-af9d45dfa513" location="5 6"><up/><down/></link>
+	<link id="05209fdc-17a6-4819-ad12-9b7b1473e3c3" location="5 8"><up/><down/></link>
+	<link id="5b530d43-88ec-44f5-9e27-19c264a5aba0" location="3 9"><up/><down/><right/></link>
+	<link id="bf0b4b5f-28e1-4906-91c4-2c30ad273678" location="4 9"><left/><right/></link>
+	<link id="7f1930e4-5d0a-432d-9c78-b421db9e3ebd" location="5 9"><up/><left/><down/></link>
+	<link id="c3c0d3af-5340-477f-a363-fa6a99a2b484" location="5 11"><up/><down/><right/></link>
+	<link id="779f5115-292f-4b62-81d6-a94cd126cd86" location="6 11"><left/><right/></link>
+	<link id="d93b52c6-0845-44fe-b268-3fc160ebaf6d" location="7 11"><left/><down/><right/></link>
+	<link id="0855fbe8-7ccf-46d7-8b43-b3ae2f5ae0fc" location="5 16"><up/><down/></link>
+
+</sfc>

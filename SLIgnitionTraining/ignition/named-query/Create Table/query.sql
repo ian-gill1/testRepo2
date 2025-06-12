@@ -1,0 +1,1 @@
+select SensorId,SensorName from Overview_Config

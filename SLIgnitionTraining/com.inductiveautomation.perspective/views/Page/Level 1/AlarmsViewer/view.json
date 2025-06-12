@@ -1,0 +1,38 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "AlarmJournalTable"
+        },
+        "position": {
+          "basis": "400px"
+        },
+        "props": {
+          "dateRange": {
+            "realtime": {
+              "interval": 4
+            }
+          },
+          "filter": {
+            "conditions": {
+              "provider": "SLIgnitionProvider"
+            }
+          },
+          "name": "SLIgnitionJournal"
+        },
+        "type": "ia.display.alarmjournaltable"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "direction": "column"
+    },
+    "type": "ia.container.flex"
+  }
+}

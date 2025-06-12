@@ -1,0 +1,255 @@
+{
+  "custom": {},
+  "params": {
+    "SensorId": 1
+  },
+  "propConfig": {
+    "params.SensorId": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "LedDisplay"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "propConfig": {
+          "props.value": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "SensorId": "{view.params.SensorId}"
+                },
+                "tagPath": "[SLIgnitionProvider]Sensors/Sensor {SensorId}/Value.value"
+              },
+              "type": "tag"
+            }
+          }
+        },
+        "type": "ia.display.led-display"
+      },
+      {
+        "meta": {
+          "name": "TextField"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "\"Sensor \"+{view.params.SensorId}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "color": "#0000FF",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.input.text-field"
+      },
+      {
+        "meta": {
+          "name": "Dropdown"
+        },
+        "position": {
+          "basis": "36px"
+        },
+        "propConfig": {
+          "props.value": {
+            "binding": {
+              "config": {
+                "bidirectional": true,
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "SensorId": "{view.params.SensorId}"
+                },
+                "tagPath": "[SLIgnitionProvider]Sensors/Sensor {SensorId}/State.value"
+              },
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "dropdownOptionStyle": {
+            "cursor": "pointer"
+          },
+          "options": [
+            {
+              "label": "Off",
+              "value": 0
+            },
+            {
+              "label": "On",
+              "value": 1
+            },
+            {
+              "label": "Calibrate",
+              "value": 2
+            }
+          ],
+          "style": {
+            "cursor": "pointer",
+            "fontWeight": "bold",
+            "textAlign": "center"
+          }
+        },
+        "type": "ia.input.dropdown"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tsystem.perspective.closePopup(\"sensorPopup\") #the id of the popup"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "props": {
+          "style": {
+            "backgroundColor": "#D90000",
+            "color": "#000000",
+            "cursor": "pointer"
+          },
+          "text": "Close"
+        },
+        "type": "ia.input.button"
+      },
+      {
+        "meta": {
+          "name": "AlarmStatusTable"
+        },
+        "position": {
+          "basis": "324px"
+        },
+        "propConfig": {
+          "props.filters.active.text": {
+            "binding": {
+              "config": {
+                "expression": "\"Sensor \" + {view.params.SensorId} + \" \""
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "filters": {
+            "active": {
+              "states": {
+                "clearUnacked": false
+              }
+            }
+          }
+        },
+        "type": "ia.display.alarmstatustable"
+      },
+      {
+        "meta": {
+          "name": "NumericEntryField"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "propConfig": {
+          "props.value": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "SensorId": "{view.params.SensorId}"
+                },
+                "tagPath": "[SLIgnitionProvider]Sensors/Sensor {SensorId}/lowSP.value"
+              },
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "placeholder": "Set Low Setpoint"
+        },
+        "type": "ia.input.numeric-entry-field"
+      },
+      {
+        "meta": {
+          "name": "NumericEntryField_0"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "propConfig": {
+          "props.value": {
+            "binding": {
+              "config": {
+                "bidirectional": true,
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "SensorId": "{view.params.SensorId}"
+                },
+                "tagPath": "[SLIgnitionProvider]Sensors/Sensor {SensorId}/highSP.value"
+              },
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "placeholder": "Set High Setpoint"
+        },
+        "type": "ia.input.numeric-entry-field"
+      },
+      {
+        "meta": {
+          "name": "TextField_0"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "\"Sensor ID : \"+ {view.params.SensorId}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "type": "ia.input.text-field"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignItems": "center",
+      "direction": "column",
+      "justify": "center"
+    },
+    "type": "ia.container.flex"
+  }
+}

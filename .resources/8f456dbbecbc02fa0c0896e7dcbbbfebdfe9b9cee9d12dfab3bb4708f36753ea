@@ -1,0 +1,88 @@
+{
+  "custom": {},
+  "params": {},
+  "props": {},
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "Dropdown"
+        },
+        "position": {
+          "basis": "36px"
+        },
+        "propConfig": {
+          "props.options": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {},
+                "tagPath": "[SLIgnitionProvider]WorkOrder/OpenWOs"
+              },
+              "transforms": [
+                {
+                  "code": "\tdataset \u003d system.dataset.toPyDataSet(value)\n\treturn [{\"label\": row[\"WO\"], \"id\": row[\"id\"], \"value\": row[\"MachineParam\"]} for row in dataset]",
+                  "type": "script"
+                }
+              ],
+              "type": "tag"
+            }
+          },
+          "props.value": {
+            "binding": {
+              "config": {
+                "bidirectional": true,
+                "path": "session.custom.WorkOrder"
+              },
+              "type": "property"
+            }
+          }
+        },
+        "type": "ia.input.dropdown"
+      },
+      {
+        "events": {
+          "dom": {
+            "onClick": {
+              "config": {
+                "script": "\tchartId \u003d getChartInstance.getInstanceId(\"Batch Control\")\n\tsystem.sfc.setVariable(chartId, \"DownloadButton\", True)\n\tmachineParam \u003d self.session.custom.WorkOrder\n\tsystem.sfc.setVariable(chartId, \"MachineParam\", machineParam)\n\t"
+              },
+              "scope": "G",
+              "type": "script"
+            }
+          }
+        },
+        "meta": {
+          "name": "Button"
+        },
+        "position": {
+          "basis": "34px"
+        },
+        "propConfig": {
+          "props.enabled": {
+            "binding": {
+              "config": {
+                "expression": "{../Dropdown.props.value} !\u003d null"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "props": {
+          "text": "Download"
+        },
+        "type": "ia.input.button"
+      }
+    ],
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignItems": "center",
+      "direction": "column",
+      "justify": "center"
+    },
+    "type": "ia.container.flex"
+  }
+}

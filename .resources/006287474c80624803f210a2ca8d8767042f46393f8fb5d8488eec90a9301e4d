@@ -1,0 +1,134 @@
+{
+  "custom": {},
+  "params": {
+    "SensorId": 1,
+    "SensorName": "value"
+  },
+  "propConfig": {
+    "params.SensorId": {
+      "paramDirection": "input",
+      "persistent": true
+    },
+    "params.SensorName": {
+      "paramDirection": "input",
+      "persistent": true
+    }
+  },
+  "props": {
+    "defaultSize": "value"
+  },
+  "root": {
+    "children": [
+      {
+        "meta": {
+          "name": "TextField"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "expression": "\"Sensor \"+{view.params.SensorId}"
+              },
+              "type": "expr"
+            }
+          }
+        },
+        "type": "ia.input.text-field"
+      },
+      {
+        "meta": {
+          "name": "Label"
+        },
+        "position": {
+          "basis": "32px"
+        },
+        "propConfig": {
+          "props.text": {
+            "binding": {
+              "config": {
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "SensorId": "{view.params.SensorId}"
+                },
+                "tagPath": "[SLIgnitionProvider]Sensors/Sensor {SensorId}/Value.value"
+              },
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "style": {
+            "borderStyle": "solid",
+            "borderWidth": 1
+          }
+        },
+        "type": "ia.display.label"
+      },
+      {
+        "meta": {
+          "name": "Dropdown"
+        },
+        "position": {
+          "basis": "36px"
+        },
+        "propConfig": {
+          "props.value": {
+            "binding": {
+              "config": {
+                "bidirectional": true,
+                "fallbackDelay": 2.5,
+                "mode": "indirect",
+                "references": {
+                  "SensorId": "{view.params.SensorId}"
+                },
+                "tagPath": "[SLIgnitionProvider]Sensors/Sensor {SensorId}/State.value"
+              },
+              "type": "tag"
+            }
+          }
+        },
+        "props": {
+          "options": [
+            {
+              "label": "OFF",
+              "value": 0
+            },
+            {
+              "label": "ON",
+              "value": 1
+            },
+            {
+              "label": "CALIBRATE",
+              "value": 2
+            }
+          ]
+        },
+        "type": "ia.input.dropdown"
+      }
+    ],
+    "events": {
+      "dom": {
+        "onClick": {
+          "config": {
+            "script": "\tsystem.perspective.openPopup(\n\tid\u003d\"sensorPopup\",\n\tview\u003d\"Page/Embedded/Sensor\",\n\tparams\u003d{\"SensorId\": self.view.params.SensorId},\n\tshowCloseIcon\u003d False,\n\tresizable\u003d True\n)"
+          },
+          "scope": "G",
+          "type": "script"
+        }
+      }
+    },
+    "meta": {
+      "name": "root"
+    },
+    "props": {
+      "alignItems": "center",
+      "direction": "column",
+      "justify": "center"
+    },
+    "type": "ia.container.flex"
+  }
+}

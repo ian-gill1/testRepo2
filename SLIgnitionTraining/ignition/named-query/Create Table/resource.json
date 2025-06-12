@@ -1,0 +1,33 @@
+{
+  "scope": "DG",
+  "version": 2,
+  "restricted": false,
+  "overridable": true,
+  "files": [
+    "query.sql"
+  ],
+  "attributes": {
+    "useMaxReturnSize": false,
+    "autoBatchEnabled": false,
+    "fallbackValue": "",
+    "maxReturnSize": 100,
+    "cacheUnit": "SEC",
+    "type": "Query",
+    "enabled": true,
+    "cacheAmount": 1,
+    "cacheEnabled": false,
+    "database": "SLIgnitionDB",
+    "fallbackEnabled": false,
+    "lastModificationSignature": "f609b1719711ca21f4913fe52b60f184f188133c3433ded04d9c5bd4f800a1ea",
+    "permissions": [
+      {
+        "zone": "",
+        "role": ""
+      }
+    ],
+    "lastModification": {
+      "actor": "iangill",
+      "timestamp": "2025-02-05T11:25:30Z"
+    }
+  }
+}
